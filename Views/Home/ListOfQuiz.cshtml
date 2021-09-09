@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TestOSKI.Models.Quiz>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListOfQuiz</title>
+</head>
+    <body>
+        
+        
+
+        <div class="container mt-sm-5 my-1">
+            <table class="table table-borderless">
+                
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            
+                            <td>
+                                <p class="text-light">@Html.DisplayFor(modelItem => item.Name)</p>
+                            </td>
+                            <td>
+                                <a class="btn btn-success" asp-action="QuizPage" asp-controller="Home" asp-route-id="@item.Id">Start</a>
+                                
+                            </td>
+
+                        </tr>
+                    }
+                
+            </table>
+        </div>
+        </body>
+   
+</html>

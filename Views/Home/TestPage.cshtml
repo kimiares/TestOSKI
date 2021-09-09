@@ -1,0 +1,147 @@
+﻿@using TestOSKI.Models
+@using TestOSKI.ViewModels
+@model QuizQuestionsViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "TestPage";
+}
+
+
+
+@foreach (var item in Model.Questions)
+{
+<div class="container mt-sm-5 my-1">
+    <div class="question ml-sm-5 pl-sm-5 pt-2">
+        <div class="py-2 h5"><b>@Html.DisplayFor(modelItem => item.TextOfQuestion)</b></div>
+        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+            
+            <form>
+              
+                <label class="options">
+                    @Html.DisplayFor(modelItem => item.FirstAnswer)
+                    <input type="radio" name="@item.Id" value="@item.FirstAnswer" id="check"> <span class="checkmark"></span>
+                </label>
+
+                <label class="options">
+                    @Html.DisplayFor(modelItem => item.SecondAnswer)
+                    <input type="radio" name="@item.Id" value="@item.SecondAnswer" id="check" onchange=""> <span class="checkmark"></span>
+                </label>
+
+                <label class="options">
+                    @Html.DisplayFor(modelItem => item.ThirdAnswer)
+                    <input type="radio" name="@item.Id" value="@item.ThirdAnswer" id="check"> <span class="checkmark"></span>
+                </label>
+                
+                
+
+
+
+            </form>
+        </div>
+    </div>
+
+    @if (item == Model.Questions.Last() && Model.PageViewModel.PageNumber == Model.PageViewModel.TotalPages)
+    {
+        <div class="d-flex align-items-center pt-3">
+            <div class="ml-auto mr-sm-5">
+                
+                <a class="btn btn-success" asp-action="CurrentUserResult" asp-controller="Home">FINISH</a>
+            </div>
+            <label id="userAnswer"></label>
+        </div>
+
+}
+
+
+</div>
+
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+<div class="d-flex align-items-center pt-3">
+    <div class="ml-auto mr-sm-5">
+        <a asp-action="TestPage"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-success"
+           onclick="sendResult()"
+        
+           >
+            Next
+            
+        </a>
+    </div>
+    </div>
+    }
+
+    <style>
+        @@font-face {
+            font-family: 'FontAwesome';
+            src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal
+        }
+
+        .glyphicon {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .glyphicon-chevron-right:before {
+            content: "\f054";
+        }
+
+        .glyphicon-chevron-left:before {
+            content: "\f053";
+        }
+    </style>
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    function sendResult() {
+        //document.getElementById("userAnswer").innerHTML = "";
+        var tempquestionId;
+        var tempselectedValue = "";
+        var result = document.getElementsByTagName('input');
+        
+        for (i = 0; i < result.length; i++) {
+            if (result[i].type == "radio") {
+                if (result[i].checked) {
+                    tempselectedValue += result[i].value;
+                    tempquestionId = result[i].name;
+
+
+                }
+            }
+            var selectedValue = tempselectedValue;
+            var questionId = tempquestionId;
+
+            $.ajax({
+                type: "post",
+                url: "/Home/AddPoint",
+                data: { 'selectedValue': selectedValue, 'questionId': questionId },
+                success: function (status) {
+                    console.log('Send');
+                },
+                error: function () {
+                    console.log('something went wrong - debug it!');
+                }
+
+            });
+
+
+
+        }
+
+
+</script>
+
+
+

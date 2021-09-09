@@ -1,0 +1,16 @@
+﻿@model TestOSKI.Models.Result
+
+@{
+    ViewData["Title"] = "CurrentUserResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Results </h3>
+
+<div>
+
+    <h2 class="text-center">You`ve got&nbsp;@ViewData["Message"]&nbsp;right answers</h2>
+    <a asp-action="ListOfQuiz" class="btn btn-success ">Back</a>
+
+</div>
+

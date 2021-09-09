@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div>
+    <p class="text-center text-light"><b>Questions and Answers</b></p>
+    @*<a class="nav-link text-dark text-center" asp-area="" asp-controller="User" asp-action="Login">Log In</a>
+    <a class="nav-link text-dark text-center" asp-area="" asp-controller="User" asp-action="Registration">Registration</a>*@
+    @if (User.Identity.IsAuthenticated) {
+    <a class="nav-link text-dark text-center" asp-area="" asp-controller="Home" asp-action="ListOfQuiz"><b class="text-light">List of tests</b></a>
+    }
+    
+</div>
