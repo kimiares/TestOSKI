@@ -66,16 +66,19 @@ namespace TestOSKI.Controllers
         {
             return View("StartPage");
         }
+        
         public IActionResult QuizPage(int id)
         {
             Quiz quiz = context.Quizzes.FirstOrDefault(qui => qui.Id == id);
             return View(quiz);
         }
+        [Authorize]
         public IActionResult ListOfQuiz()
 
         {
             return View(context.Quizzes.ToList());
         }
+        
         public IActionResult TestPage(int id, int page = 1)
         {
 
