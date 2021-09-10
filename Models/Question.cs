@@ -17,7 +17,7 @@ namespace TestOSKI.Models
         public string ThirdAnswer { get; set; }
         public string WrightAnswer { get; set; }
 
-        public int Point { get; set; } = 1;    //add to user result    
+        
         
         public int QuizId { get; set; } 
         public Quiz Quiz { get; set; }

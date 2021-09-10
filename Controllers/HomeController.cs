@@ -105,6 +105,7 @@ namespace TestOSKI.Controllers
 
         {
             Result userResult = context.Results.FirstOrDefault(r => r.UserName == LoggedInUser);
+            
             if(userResult == null)
             {
                 context.Results.Add(new Result { UserName = LoggedInUser, TotalPoint = 1 });
