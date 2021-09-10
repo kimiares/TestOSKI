@@ -15,14 +15,14 @@ namespace TestOSKI.Models
             : base(options)
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            Database.EnsureCreated();
         }
         public DbSet<TestOSKI.Models.Quiz> Quizzes { get; set; }
         public DbSet<TestOSKI.Models.Question> Questions { get; set; }
         public DbSet<TestOSKI.Models.Result> Results { get; set; }
         public DbSet<TestOSKI.Models.User> Users { get; set; }
 
-        //public DbSet<TestOSKI.Models.Quiz> Quiz { get; set; }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Quiz>().HasData(

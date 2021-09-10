@@ -26,7 +26,7 @@
 
                 <label class="options">
                     @Html.DisplayFor(modelItem => item.SecondAnswer)
-                    <input type="radio" name="@item.Id" value="@item.SecondAnswer" id="check" onchange=""> <span class="checkmark"></span>
+                    <input type="radio" name="@item.Id" value="@item.SecondAnswer" id="check"> <span class="checkmark"></span>
                 </label>
 
                 <label class="options">
@@ -34,10 +34,6 @@
                     <input type="radio" name="@item.Id" value="@item.ThirdAnswer" id="check"> <span class="checkmark"></span>
                 </label>
                 
-                
-
-
-
             </form>
         </div>
     </div>
@@ -51,10 +47,7 @@
             </div>
             <label id="userAnswer"></label>
         </div>
-
 }
-
-
 </div>
 
 }
@@ -66,11 +59,8 @@
         <a asp-action="TestPage"
            asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
            class="btn btn-success"
-           onclick="sendResult()"
-        
-           >
+           onclick="sendResult()">
             Next
-            
         </a>
     </div>
     </div>
@@ -104,13 +94,12 @@
 
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
+    <script>
     function sendResult() {
-        //document.getElementById("userAnswer").innerHTML = "";
         var tempquestionId;
         var tempselectedValue = "";
         var result = document.getElementsByTagName('input');
-        
+
         for (i = 0; i < result.length; i++) {
             if (result[i].type == "radio") {
                 if (result[i].checked) {
@@ -125,7 +114,8 @@
 
             $.ajax({
                 type: "post",
-                url: "/Home/AddPoint",
+                url: '@Url.Action("AddPoint", "Home")',
+
                 data: { 'selectedValue': selectedValue, 'questionId': questionId },
                 success: function (status) {
                     console.log('Send');
@@ -136,12 +126,10 @@
 
             });
 
-
-
         }
 
 
-</script>
+    </script>
 
 
 

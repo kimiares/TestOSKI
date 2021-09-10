@@ -33,7 +33,7 @@ namespace TestOSKI.Controllers
             return View();
         }
 
-        [HttpGet]
+        //[HttpGet]
         //public IActionResult CreateQuestion()
         //{
         //    ViewBag.Quiz = new SelectList(context.Quizzes.ToList(), "Id", "Name");
@@ -49,18 +49,18 @@ namespace TestOSKI.Controllers
         //}
 
 
-        [HttpGet]
-        public IActionResult CreatQuiz()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreatQuiz(Quiz quiz)
-        {
-            context.Quizzes.Add(quiz);
-            await context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
-        }
+        //[HttpGet]
+        //public IActionResult CreatQuiz()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> CreatQuiz(Quiz quiz)
+        //{
+        //    context.Quizzes.Add(quiz);
+        //    await context.SaveChangesAsync();
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         public IActionResult Privacy()
         {
@@ -101,7 +101,7 @@ namespace TestOSKI.Controllers
       
 
         [HttpPost]
-        public void AddPoint(string selectedValue, string questionId)
+        public void AddPoint( string selectedValue, string questionId)
 
         {
             Result userResult = context.Results.FirstOrDefault(r => r.UserName == LoggedInUser);
